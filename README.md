@@ -92,7 +92,26 @@ func q2_04() {
 	}
 }
 func q2_05() {
-
+	var n int
+	fmt.Print("Digite o tamanho da sequência: ")
+	fmt.Scan(&n)
+	fmt.Print("Digite a sequência: ")
+	seq := InputToList(n)
+	m := 0
+	for i := range seq {
+		var c int
+		for j := i; j < len(seq)-1; j++ {
+			if seq[j] < seq[j+1] {
+				c += 1
+			} else {
+				if c > m {
+					m = c
+				}
+			}
+			fmt.Print(c, m, "\n")
+		}
+	}
+	fmt.Printf("O comprimento do segmento crescente máximo é de %v.", m)
 }
 
 func fact(n int) int {
