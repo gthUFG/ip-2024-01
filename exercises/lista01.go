@@ -9,10 +9,12 @@ import (
 	"strings"
 )
 
+var QuestsList01 = []func(){q1_01, q1_02, q1_03, q1_04, q1_05, q1_06, q1_07, q1_08, q1_09, q1_10, q1_11, q1_12, q1_13, q1_14, q1_15, q1_16, q1_17, q1_18, q1_19, q1_20}
+
 func init() {
 }
 
-func Q01() {
+func q1_01() {
 	fmt.Print("Notas: ")
 	// Jeito massa fácil gostoso (só aguenta três notas)
 	// var n1, n2, n3 float64
@@ -20,7 +22,7 @@ func Q01() {
 	// notes := []float64{n1,n2,n3}
 
 	// Jeito masoquista louco pirado (aguenta infinitas)
-	notes := inputToList()
+	notes := InputToList()
 
 	var s float64
 	for i := range notes {
@@ -32,20 +34,20 @@ func Q01() {
 	} else {
 		fmt.Printf("Reprovado, sua nota foi de %.2f.", average)
 	}
-	return
 }
-func Q02() {
+
+func q1_02() {
 
 	fmt.Println("Número de jogos: ")
 	var n int
 	fmt.Scan(&n)
 	for i := 1; i < (n + 1); i++ {
 		fmt.Printf("Jogo %v: ", i)
-		data := inputToList()
+		data := InputToList()
 		fmt.Printf("A renda do jogo foi de R$%.2f\n", (data[0] / 100 * (data[1]*1 + data[2]*5 + data[3]*10 + data[4]*20)))
 	}
 }
-func Q03() {
+func q1_03() {
 
 	fmt.Println("Digite três algarismos: ")
 	var n1, n2, n3 string
@@ -57,7 +59,7 @@ func Q03() {
 	var n, _ = strconv.ParseFloat(n1+n2+n3, 32)
 	fmt.Printf("O número é %v, seu quadrado é %v", n, math.Pow(n, 2))
 }
-func Q04() {
+func q1_04() {
 	var s, q float64
 	fmt.Println("Salário Mínimo: ")
 	fmt.Scan(&s)
@@ -67,7 +69,7 @@ func Q04() {
 	fmt.Printf("Custo do consumo: R$ %.2f\n", s*0.007*q)
 	fmt.Printf("Custo com desconto: R$ %.2f", s*0.007*q*0.9)
 }
-func Q05() {
+func q1_05() {
 	var acc, waste float64
 	var kind string
 	var value float64
@@ -85,7 +87,7 @@ func Q05() {
 	fmt.Printf("Conta: %v\n", acc)
 	fmt.Printf("Valor da conta: R$%.2f", value)
 }
-func Q06() {
+func q1_06() {
 	var n int
 	fmt.Print("Número de temperaturas em ºF: ")
 	fmt.Scan(&n)
@@ -96,7 +98,7 @@ func Q06() {
 		fmt.Printf("%.2fºF equivalem a %.2fºC.\n", t, 5*(t-32)/9)
 	}
 }
-func Q07() {
+func q1_07() {
 	var t, r float64
 	fmt.Print("Temperatura em ºF: ")
 	fmt.Scan(&t)
@@ -104,7 +106,7 @@ func Q07() {
 	fmt.Scan(&r)
 	fmt.Printf("O valor em ºC: %.2f\nA quantidade de chuva em mm: %.2f", 5*(t-32)/9, r*25.4)
 }
-func Q08() {
+func q1_08() {
 	var r, h float64
 	fmt.Print("Raio da lata: ")
 	fmt.Scan(&r)
@@ -112,21 +114,17 @@ func Q08() {
 	fmt.Scan(&h)
 	fmt.Printf("O valor do custo de fabricação é: R$%.2f.", (2*math.Pi*r*h+2*math.Pi*math.Pow(r, 2))*100)
 }
-func Q09() {
+func q1_09() {
 	fmt.Print("Valores de A, B e C: ")
-	coefs := inputToList()
-	if len(coefs) != 3 {
-		fmt.Println("Dígitos inválidos")
-		return
-	}
+	coefs := InputToList(3)
 	fmt.Printf("∆ = %v.", math.Pow(coefs[1], 2)-4*coefs[0]*coefs[2])
 }
-func Q10() {
+func q1_10() {
 	fmt.Print("Escreva os quatro elementos da matriz (M11, M12, M21, M22): ")
-	els := inputToList(4)
+	els := InputToList(4)
 	fmt.Printf("O valor do determinante é de %v.", els[0]*els[3]-els[1]*els[2])
 }
-func Q11() {
+func q1_11() {
 	fmt.Print("Digite um número: ")
 	var n int
 	fmt.Scan(&n)
@@ -136,7 +134,7 @@ func Q11() {
 		fmt.Print("O nḿero não é divisível.")
 	}
 }
-func Q12() {
+func q1_12() {
 	var t float64
 	fmt.Print("Por quanto tempo será alugado? ")
 	fmt.Scan(&t)
@@ -151,7 +149,7 @@ func Q12() {
 	}
 	fmt.Printf("O preço será de R$%.2f.", price)
 }
-func Q13() {
+func q1_13() {
 	var x float32
 	fmt.Print("Digite a nota do aluno: ")
 	fmt.Scan(&x)
@@ -171,7 +169,7 @@ func Q13() {
 	}
 	fmt.Printf("Nota: %v. Conceito: %v.", x, c)
 }
-func Q14() {
+func q1_14() {
 	var h, a float64
 	fmt.Print("Digite a altura da pirâmide em m³: ")
 	fmt.Scan(&h)
@@ -179,7 +177,7 @@ func Q14() {
 	fmt.Scan(&a)
 	fmt.Printf("O volume da pirâmide é de %.2f metros cúbicos.", (6*math.Pow(a, 2)*math.Sqrt(3)/4)*h/3)
 }
-func Q15() {
+func q1_15() {
 	var n int
 	fmt.Print("Digite um número: ")
 	fmt.Scan(&n)
@@ -187,7 +185,7 @@ func Q15() {
 		fmt.Printf("%v^2 = %v\n", i, i*i)
 	}
 }
-func Q16() {
+func q1_16() {
 	var s, f float64
 	fmt.Print("Qual o salário a ser reajustado? ")
 	fmt.Scan(&s)
@@ -199,9 +197,9 @@ func Q16() {
 		fmt.Print("Salário inválido.")
 		return
 	}
-	fmt.Printf("Salário com reajuste: R$%.2f.", f, 2)
+	fmt.Printf("Salário com reajuste: R$%.2f.", f)
 }
-func Q17() {
+func q1_17() {
 	fmt.Print("Digite os valores de x e de y: ")
 	var x, y int
 	fmt.Scan(&x, &y)
@@ -213,7 +211,7 @@ func Q17() {
 		fmt.Print("O primeiro número não é par.")
 	}
 }
-func Q18() {
+func q1_18() {
 	var a1, r, n, s int
 	fmt.Print("Digite os valores de a1, r e n: ")
 	fmt.Scan(&a1, &r, &n)
@@ -223,7 +221,7 @@ func Q18() {
 	}
 	fmt.Printf("A soma dessa P.A. é de %v.", s)
 }
-func Q19() {
+func q1_19() {
 	var n int
 	fmt.Print("Digite um número: ")
 	fmt.Scan(&n)
@@ -237,13 +235,13 @@ func Q19() {
 	}
 	fmt.Printf("%.6f", s)
 }
-func Q20() {
+func q1_20() {
 	fmt.Print("Digite o tempo em horas, minutos e segundos: ")
-	ts := inputToList(3)
+	ts := InputToList(3)
 	fmt.Printf("O tempo é de %v segundos.", ts[0]*3600+ts[1]*60+ts[2])
 }
 
-func inputToList(params ...int) []float64 {
+func InputToList(params ...int) []float64 {
 	reader := bufio.NewReader(os.Stdin)
 	inp, _ := reader.ReadString('\n')
 	notes := toFloat64Elements(strings.Split(strings.TrimSpace(inp), " "))
