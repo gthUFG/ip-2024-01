@@ -9,7 +9,8 @@ import (
 	"strings"
 )
 
-var QuestsList01 = []func(){q1_01, q1_02, q1_03, q1_04, q1_05, q1_06, q1_07, q1_08, q1_09, q1_10, q1_11, q1_12, q1_13, q1_14, q1_15, q1_16, q1_17, q1_18, q1_19, q1_20}
+var QuestsList01 = []func(){q1_01, q1_02, q1_03, q1_04, q1_05, q1_06, q1_07, q1_08, q1_09, q1_10,
+	q1_11, q1_12, q1_13, q1_14, q1_15, q1_16, q1_17, q1_18, q1_19, q1_20}
 
 func init() {
 }
@@ -35,7 +36,6 @@ func q1_01() {
 		fmt.Printf("Reprovado, sua nota foi de %.2f.", average)
 	}
 }
-
 func q1_02() {
 
 	fmt.Println("Número de jogos: ")

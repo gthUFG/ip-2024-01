@@ -8,7 +8,9 @@ import (
 	"strconv"
 )
 
-var QuestsList02 = []func(){q2_01, q2_02, q2_03, q2_04, q2_05, q2_06, q2_07, q2_08, q2_09, q2_10, q2_11, q2_12, q2_13, q2_14, q2_15, q2_16, q2_17, q2_18, q2_19, q2_20, q2_21, q2_22, q2_23, q2_24, q2_25, q2_26, q2_27}
+var QuestsList02 = []func(){q2_01, q2_02, q2_03, q2_04, q2_05, q2_06, q2_07, q2_08, q2_09,
+	q2_10, q2_11, q2_12, q2_13, q2_14, q2_15, q2_16, q2_17, q2_18,
+	q2_19, q2_20, q2_21, q2_22, q2_23, q2_24, q2_25, q2_26, q2_27}
 
 func init() {
 
@@ -438,7 +440,7 @@ func q2_23() {
 	var n int
 	fmt.Print("Quantos pares de números amigos quer encontrar? ")
 	fmt.Scan(&n)
-	if n < 1 && n > 9 {
+	if n < 1 || n > 9 {
 		fmt.Print("Número inválido ou muito alto.")
 		return
 	}
