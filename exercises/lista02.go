@@ -25,7 +25,7 @@ func q2_01() {
 		}
 		var situation int
 		mat := int(data[0])
-		grade := 0.7*(sum(data[1:9])/8) + 0.15*(sum(data[9:14])/5) + 0.15*(data[14])
+		grade := 0.7*(Sum(data[1:9])/8) + 0.15*(Sum(data[9:14])/5) + 0.15*(data[14])
 		if grade < 6 {
 			situation += 1
 		}
@@ -340,7 +340,7 @@ func q2_18() {
 	ns := InputToList(3)
 	mmc := 1
 	i := 2
-	for sum(ns) > 3 {
+	for Sum(ns) > 3 {
 		divided := false
 		cp := []float64{ns[0], ns[1], ns[2]}
 		for j := range ns {
@@ -386,8 +386,8 @@ func q2_20() {
 		fmt.Print(d[i])
 	}
 
-	fmt.Print(" = ", sum(d), ". ")
-	if int(sum(d)) == n {
+	fmt.Print(" = ", Sum(d), ". ")
+	if int(Sum(d)) == n {
 		fmt.Print("O número é perfeito.")
 	} else {
 		fmt.Print("O número não é perfeito.")
@@ -449,9 +449,9 @@ func q2_23() {
 	for counter < n {
 		for {
 			i++
-			j := int(sum(divs(i)))
+			j := int(Sum(divs(i)))
 			if i != last && j != last && j != i {
-				if int(sum(divs(j))) == i {
+				if int(Sum(divs(j))) == i {
 					counter += 1
 					last = i
 					fmt.Printf("(%v, %v)\n", i, j)
@@ -540,7 +540,7 @@ func fact(n int) int {
 	}
 }
 
-func sum(list []float64) float64 {
+func Sum(list []float64) float64 {
 	var s float64
 	for i := range list {
 		s += list[i]

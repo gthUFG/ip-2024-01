@@ -16,7 +16,7 @@ func Ex01() {
 	fmt.Scanln(&n1, &n2, &n3)
 	numbers := []float32{n1, n2, n3}
 
-	fmt.Printf("Em ordem crescente: %v", sort(numbers))
+	fmt.Printf("Em ordem crescente: %v", Sort(numbers))
 }
 
 func min(list []float32) float32 {
@@ -28,7 +28,7 @@ func min(list []float32) float32 {
 	}
 	return m
 }
-func sort(list []float32) []float32 {
+func Sort(list []float32) []float32 {
 	var sorted, cp = make([]float32, 0, len(list)), list[:]
 	for i := 0; i < len(list); i++ {
 		sorted = append(sorted, min(cp))

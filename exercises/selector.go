@@ -8,7 +8,7 @@ func main() {
 	var l, n int
 	fmt.Print("\n\033[0;36mQual lista? \033[m")
 	fmt.Scanln(&l)
-	var quests = [][]func(){QuestsList01, QuestsList02}
+	var quests = [][]func(){QuestsList01, QuestsList02, QuestsList03}
 	if l <= len(quests) && l >= 1 {
 		fmt.Print("\n\033[0;36mQual exercício? \033[m")
 		fmt.Scanln(&n)
