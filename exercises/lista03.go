@@ -315,13 +315,74 @@ func q3_20() {
 	}
 }
 func q3_21() {
-
+	v := sort(IndInputs())
+	v1, v2 := []float64{}, []float64{}
+	for i := range v {
+		if int(v[i])%2 == 0 {
+			v1 = append(v1, v[i])
+		} else {
+			v2 = append(v2, v[i])
+		}
+	}
+	v2 = reverse(v2)
+	fmt.Println()
+	for i := range v1 {
+		fmt.Println(v1[i])
+	}
+	for i := range v2 {
+		fmt.Println(v2[i])
+	}
 }
 func q3_22() {
+	for {
+		fmt.Print("Digite a quantidade de caracteres e o limite de tamanho: ")
+		info := InputToList(2)
+		if int(info[0]) <= 0 {
+			break
+		}
+		fmt.Print("Digite o número: ")
+		var n string
+		fmt.Scan(&n)
+		try := ""
+		for i := int(info[0] - 1); i >= 0; i-- {
+			if len(try) < int(info[1]) {
+				try = string(n[i]) + try
+			} else {
+				if try[0] < n[i] {
+					try = string(n[i]) + try[1:]
+				}
+			}
+		}
+		fmt.Println(try)
+	}
 
 }
 func q3_23() {
-
+	fmt.Print("Digite as frases, separadas por \";\": ")
+	reader := bufio.NewReader(os.Stdin)
+	str, _ := reader.ReadString('\n')
+	fmt.Print(str)
+	vows := make([]int, 11)
+	for i := 0; i < len(str); i++ {
+		separated := false
+		vowels := [][]string{{"a", "A"}, {"e", "E"}, {"i", "I"}, {"o", "O"}, {"u", "U"}, {";", ";"}}
+		for j := 0; j < len(vowels); j++ {
+			fmt.Print(j)
+			if string(str[i]) == vowels[j][0] || string(str[i]) == vowels[j][1] {
+				if j == 5 {
+					separated = true
+					vows[10] += 1
+				} else {
+					vows[j+[]int{0, 5}[BToi(separated)]] += 1
+				}
+			}
+		}
+	}
+	if vows[10] != 1 {
+		fmt.Print(vows[10], "Formato inválido.\n")
+		return
+	}
+	fmt.Print(vows[:5], "\n", vows[5:10])
 }
 func q3_24() {
 
