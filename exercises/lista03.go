@@ -1,14 +1,14 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math"
+	"os"
 )
 
 var QuestsList03 = []func(){
-	q3_01, q3_02, q3_03, q3_04, q3_05, q3_06, q3_07, q3_08, q3_09,
-	q3_10, q3_11, q3_12, q3_13, q3_14, q3_15, q3_16, q3_17, q3_18,
-	q3_19, q3_20, q3_21, q3_22, q3_23, q3_24, q3_25, q2_26, q3_27, q3_28,
+	q3_01, q3_02, q3_03, q3_04, q3_05, q3_06, q3_07, q3_08, q3_09, q3_10, q3_11, q3_12, q3_13, q3_14, q3_15, q3_16, q3_17, q3_18, q3_19, q3_20, q3_21, q3_22, q3_23, q3_24, q3_25, q3_26, q3_27, q3_28,
 }
 
 func init() {
@@ -355,19 +355,16 @@ func q3_22() {
 		}
 		fmt.Println(try)
 	}
-
 }
 func q3_23() {
 	fmt.Print("Digite as frases, separadas por \";\": ")
 	reader := bufio.NewReader(os.Stdin)
 	str, _ := reader.ReadString('\n')
-	fmt.Print(str)
 	vows := make([]int, 11)
+	separated := false
 	for i := 0; i < len(str); i++ {
-		separated := false
 		vowels := [][]string{{"a", "A"}, {"e", "E"}, {"i", "I"}, {"o", "O"}, {"u", "U"}, {";", ";"}}
 		for j := 0; j < len(vowels); j++ {
-			fmt.Print(j)
 			if string(str[i]) == vowels[j][0] || string(str[i]) == vowels[j][1] {
 				if j == 5 {
 					separated = true
@@ -382,22 +379,125 @@ func q3_23() {
 		fmt.Print(vows[10], "Formato inválido.\n")
 		return
 	}
-	fmt.Print(vows[:5], "\n", vows[5:10])
+	var distance float64
+	for i := 0; i < 5; i++ {
+		distance += math.Pow(float64(vows[i]-vows[i+5]), 2)
+	}
+	distance = math.Sqrt(distance)
+	fmt.Printf("%v\n%v\nA distância entre as strings é de %.2f.\n", vows[:5], vows[5:10], distance)
 }
 func q3_24() {
-
+	for {
+		var n int
+		fmt.Print("Digite o número de elementos: ")
+		fmt.Scan(&n)
+		if n == 0 {
+			break
+		}
+		v := InputToList(n)
+		fmt.Print(sort(v), '\n')
+	}
 }
 func q3_25() {
-
+	fmt.Print("Quais foram os números sorteados? ")
+	ns, n := sort(InputToList(6)), 0
+	fmt.Print("Houveram quantos apostadores? ")
+	fmt.Scan(&n)
+	counter := []int{0, 0, 0}
+	for i := 0; i < n; i++ {
+		c := 0
+		v := sort(InputToList(6))
+		for i := range v {
+			for j := range ns {
+				if v[i] == ns[j] {
+					c += 1
+				}
+			}
+		}
+		if c == 6 {
+			counter[0] += 1
+		} else if c == 5 {
+			counter[1] += 1
+		} else if c == 4 {
+			counter[2] += 1
+		}
+	}
+	for i := range counter {
+		fmt.Printf("Houve %v acertador(es) da %v.\n", counter[i], []string{"sena", "quina", "quadra"}[i])
+	}
 }
 func q3_26() {
-
+	var n int
+	fmt.Print("Digite o número de casos de teste: ")
+	fmt.Scan(&n)
+	for k := 0; k < n; k++ {
+		fmt.Print("Digite o número de cada anão: \n")
+		v := sort(IndInputs(9))
+	out:
+		for i := range v {
+			for j := range v {
+				if i != j && Sum(v)-v[i]-v[j] == 100 {
+					fmt.Print("Os anões são os de número:\n")
+					for anao := range v {
+						if anao != i && anao != j {
+							fmt.Println(v[anao])
+						}
+					}
+					fmt.Println("\n")
+					break out
+				}
+			}
+		}
+	}
 }
 func q3_27() {
-
+	var n, n2 int
+	fmt.Print("Digite quantos elementos possui o primeiro vetor: ")
+	fmt.Scan(&n)
+	fmt.Print("Digite quantos elementos possui o segundo vetor: ")
+	fmt.Scan(&n2)
+	v1 := IndInputs(n)
+	v2 := IndInputs(n2)
+	for i := range v2 {
+		v1 = append(v1, v2[i])
+	}
+	v1 = sort(v1)
+	for i := range v1 {
+		fmt.Print("\n", v1[i])
+	}
 }
 func q3_28() {
-
+	var n1, n2 int
+	fmt.Print("Digite quantos elementos possui o primeiro vetor: ")
+	fmt.Scan(&n1)
+	fmt.Print("Digite quantos elementos possui o segundo vetor: ")
+	fmt.Scan(&n2)
+	v1 := InputToList(n1)
+	v2 := InputToList(n2)
+	v := append(v1[:], v2[:]...)
+	var u, n []float64
+	isInside := func(arr []float64, elem float64) bool {
+		for i := range arr {
+			if arr[i] == elem {
+				return true
+			}
+		}
+		return false
+	}
+	for i := range v {
+		if !isInside(u, v[i]) {
+			if isInside(v1, v[i]) || isInside(v2, v[i]) {
+				u = append(u, v[i])
+			}
+		}
+		if !isInside(n, v[i]) {
+			if isInside(v1, v[i]) && isInside(v2, v[i]) {
+				n = append(n, v[i])
+			}
+		}
+	}
+	fmt.Println(sort(u))
+	fmt.Print(sort(n))
 }
 
 func findM(list []float64) (int, float64, int, float64) {
@@ -458,14 +558,15 @@ func sort(list []float64) []float64 {
 	return sorted
 }
 
-func IndInputs(params ...string) []float64 {
+func IndInputs(params ...int) []float64 {
 	var n int
 	if len(params) == 0 {
-		fmt.Print("Digite o número de inputs: ")
-	} else {
 		fmt.Printf("Digite o número de %v: ", params[0])
+		fmt.Scan(&n)
+	} else {
+		n = params[0]
 	}
-	fmt.Scan(&n)
+
 	v := []float64{}
 	for i := 0; i < n; i++ {
 		var x int
