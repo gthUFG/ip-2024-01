@@ -24,12 +24,13 @@ func main() {
 	fmt.Print("Digite o método a ser utilizado: ")
 	var x int
 	fmt.Scan(&x)
-	timer := time.NewTimer(time.Second)
+	time1 := time.Now()
 	sortMethods[x].sort(l)
-	timer.Stop()
+	time2 := time.Now()
+	execTime := time2.Sub(time1)
 
-	fmt.Println(l)
-	fmt.Printf("O método %v foi utilizado, e foram gastos %v segundos para ordenar a lista.\n", sortMethods[x].name, timer)
+	fmt.Println("Lista ordenada: ", l)
+	fmt.Printf("O método %v foi utilizado, e foram gastos \033[1;96m%v\033[m para ordenar a lista.\n", sortMethods[x].name, execTime)
 }
 
 type Method struct {
@@ -38,7 +39,7 @@ type Method struct {
 }
 
 func insertion(l []float64) []float64 {
-	for i := 1; i < len(l)-1; i++ {
+	for i := 0; i < len(l)-1; i++ {
 		for j := i + 1; j > 0; j-- {
 			if l[j-1] < l[j] {
 				break
