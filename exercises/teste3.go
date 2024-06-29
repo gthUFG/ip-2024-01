@@ -76,50 +76,15 @@ func ex02(){
 }
 
 func ex03() {
-	// sort := func(vector []int) []int{
-	// 	for i:=0; i<len(vector); i++{
-	// 		swapped := false
-	// 		for j:=0; j<len(vector)-i-1; i++{
-	// 			if vector[j] < vector[j+1] {
-	// 				vector[j], vector[j+1] = vector[j+1], vector[j]
-	// 				swapped = true
-	// 			}
-	// 		}
-	// 		if swapped == false{
-	// 			break
-	// 		}
-	// 	}
-	// 	return vector
-	// }
-		
-	
-
-	getMs := func(vector []int) (int, int){
-		min, max := vector[0], vector[0]
-		for i:= range(vector){
-			if vector[i] < min {
-				min = vector[i]
-			}
-			if vector[i] > max{
-				max = vector[i]
+	sort := func(vector []int) []int{
+		for i:=0; i<len(vector); i++{
+			for j:=0; j<len(vector)-i-1; j++{
+				if vector[j] < vector[j+1] {
+					vector[j], vector[j+1] = vector[j+1], vector[j]
+				}
 			}
 		}
-		return min, max
-	}
-	sort:=func(vector []int) []int{
-		var copy, final []int
-		for i:=range(vector) {
-			copy = append(copy, vector[i])
-		}
-		for i:=range copy{
-			min, max := getMs(copy)
-			if copy[i] == min {
-				final = append(final, copy[i])
-				copy[i] = max
-			}
-		}
-		fmt.Print(final)
-		return final
+		return vector
 	}
 
 	var n int
@@ -132,5 +97,5 @@ func ex03() {
 		fmt.Scan(&n2)
 		vector = append(vector, n2)
 	}
-	sort(vector)
+	fmt.Print(sort(vector))
 }
